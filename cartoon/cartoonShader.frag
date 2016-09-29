@@ -6,7 +6,7 @@ void main()
 {
 
 	// The scene's ambient light.
-    vec4 ambient = gl_LightModel.ambient * gl_FrontMaterial.ambient;
+        vec4 ambient = gl_LightModel.ambient * gl_FrontMaterial.ambient;
 
 	// The normal vectors is generally not normalized after being
 	// interpolated across a triangle.  Here we normalize it.
@@ -41,13 +41,14 @@ void main()
 	vec3 PHalf = normalize(Viewer+PLight);
 	
 	vec3 lightDir = gl_LightSource[1].position.xyz - v;
-    float distance = length(lightDir);
+        float distance = length(lightDir);
 	
 	float PB=1.0;
 	if(dot(Normal,normalize(lightDir))<0.0) PB=0.0;
 	
 	float spotEffect = dot(normalize(gl_LightSource[1].spotDirection), normalize(-lightDir));
     
+        //Calculate diffuse and ambient values
 	if(spotEffect>gl_LightSource[1].spotCosCutoff){
 		spotEffect = pow(spotEffect, gl_LightSource[1].spotExponent);
 
@@ -62,6 +63,8 @@ void main()
 	gl_FragColor = ambient + diffuse + gl_FrontMaterial.emission;
 
 	vec4 color;
+	
+	//Check shadow color and intensity
 	if (intensity > 0.95)
 		color = vec4(1.0,0.5,0.5,1.0);
 	else if (intensity > 0.5)
