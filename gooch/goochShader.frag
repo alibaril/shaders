@@ -50,7 +50,7 @@ void main() {
 	vec3 PHalf = normalize(Viewer+PLight);
 	
 	vec3 lightDir = gl_LightSource[1].position.xyz - v;
-    float distance = length(lightDir);
+        float distance = length(lightDir);
 	
 	float PB=1.0;
 	if(dot(Normal,normalize(lightDir))<0.0) PB=0.0;
@@ -72,6 +72,7 @@ void main() {
 	// Assign final color
 	gl_FragColor = ambient + diffuse + gl_FrontMaterial.emission;
 
+        //Add metalic shading
 	vec3 kcool = min(CoolColor + DiffuseCool * vec3(gl_Color), 1.0);
 	vec3 kwarm = min(WarmColor + DiffuseWarm * vec3(gl_Color), 1.0);
 	vec3 kfinal = mix(kcool, kwarm, NdotL) * gl_Color.a;
