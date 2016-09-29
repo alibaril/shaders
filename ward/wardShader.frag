@@ -1,13 +1,11 @@
-// You are provided with an example that already includes the basic lighting calculations
-
 in vec3 N;
 in vec3 v;
 varying vec3 varEyeDir;
 
 void main()
 {
-    // The scene's ambient light.
-    vec4 ambient = gl_LightModel.ambient * gl_FrontMaterial.ambient;
+        // The scene's ambient light.
+        vec4 ambient = gl_LightModel.ambient * gl_FrontMaterial.ambient;
 
 	// The normal vectors is generally not normalized after being
 	// interpolated across a triangle.  Here we normalize it.
@@ -47,9 +45,9 @@ void main()
 	vec3 PHalf = normalize(Viewer+PLight);
 	
 	vec3 lightDir = gl_LightSource[1].position.xyz - v;
-    float distance = length(lightDir);
+        float distance = length(lightDir);
 
-    float NdotL = dot(Normal, lightDir);
+        float NdotL = dot(Normal, lightDir);
 	
 	float PB=1.0;
 	if(dot(Normal,normalize(lightDir))<0.0) PB=0.0;
